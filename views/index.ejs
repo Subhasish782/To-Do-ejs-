@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 To-Do List</h1>
+    
+    <!-- Add Task Form -->
+    <form action="/add" method="POST" class="task-form">
+      <input type="text" name="title" placeholder="Add a new task" required>
+      <input type="date" name="dueDate">
+      <button type="submit">Add</button>
+    </form>
+    <!-- Task List -->
+    <ul class="task-list">
+      <% tasks.forEach(task => { %>
+        <li class="task-item <%= task.completed ? 'done' : '' %>">
+          
+          <!-- Toggle Completion -->
+          <form action="/toggle/<%= task._id %>" method="POST" class="inline-form">
+            <button type="submit" aria-label="Toggle Complete">
+              <%= task.completed ? '✅' : '⬜' %>
+            </button>
+          </form>
+
+          <!-- Task Info -->
+          <span class="task-title"><%= task.title %></span>
+          <% if (task.dueDate) { %>
+            <small class="task-date">(Due: <%= new Date(task.dueDate).toLocaleDateString() %>)</small>
+          <% } %>
+
+          <!-- Edit Task -->
+          <form action="/edit/<%= task._id %>" method="POST" class="inline-form"
+            onsubmit="return editTask(this, '<%= task.title %>', '<%= task.dueDate %>')">
+            <input type="hidden" name="title">
+            <input type="hidden" name="dueDate">
+            <button type="submit" title="Edit Task">✏️</button>
+          </form>
+          <!-- Delete Task -->
+          <form action="/delete/<%= task._id %>" method="POST" class="inline-form">
+            <button type="submit" aria-label="Delete Task">🗑</button>
+          </form>
+
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- JavaScript for Editing -->
+  <script>
+    function editTask(form, currentTitle, currentDueDate) {
+      const newTitle = prompt("Edit task title:", currentTitle);
+      if (newTitle === null || newTitle.trim() === "") return false;
+
+      const newDueDate = prompt("Edit due date (YYYY-MM-DD):", currentDueDate);
+      if (newDueDate === null) return false;
+
+      form.title.value = newTitle.trim();
+      form.dueDate.value = newDueDate;
+      return true;
+    }
+  </script>
+</body>
+</html>

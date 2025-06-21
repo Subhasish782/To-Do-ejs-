@@ -1,0 +1,136 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.container {
+  width: 420px;
+  margin: 40px auto;
+  background: #ffffffcc;
+  padding: 32px 28px 24px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+h1 {
+  text-align: center;
+  color: #3a86ff;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+form.task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+input[type="text"], input[type="date"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f7fbff;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+  border: 1.5px solid #3a86ff;
+  outline: none;
+}
+
+button {
+  padding: 10px 10px;
+  background: #3a86ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background: #265d97;
+  transform: translateY(-2px) scale(1.05);
+}
+
+ul.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.task-item {
+  background: #f7fbff;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(58, 134, 255, 0.06);
+}
+
+li.task-item.done .task-title {
+  text-decoration: line-through;
+  color: #b0b0b0;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 1.05rem;
+  color: #22223b;
+}
+
+.task-date {
+  color: #4361ee;
+  font-size: 0.93rem;
+  margin-left: 6px;
+}
+
+.inline-form {
+  display: inline;
+}
+
+button[title="Edit Task"] {
+  background: #ffd60a;
+  color: #22223b;
+  margin-left: 4px;
+}
+
+button[title="Edit Task"]:hover {
+  background: #ffb700;
+}
+
+button[aria-label="Delete Task"] {
+  background: #ff4d6d;
+  color: #fff;
+  margin-left: 4px;
+}
+
+button[aria-label="Delete Task"]:hover {
+  background: #c9184a;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 98vw;
+    padding: 12px 4vw;
+  }
+  form.task-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  li.task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+
